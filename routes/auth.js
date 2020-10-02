@@ -115,9 +115,9 @@ authRouter.patch("/user_account/:id", (req, res) => {
      .then((data) => {
        //console.log(data);
        if (data) {
-         res.json(data);
+         res.json({msg: 'successfully updated', data});
        } else {
-         res.send("user doesnt exist");
+         res.send({msg: "user doesnt exist"});
        }
      })
      .catch((err) => {
@@ -149,7 +149,7 @@ authRouter.post("/login", (req, res) => {
                               process.env.TOKEN_SECRET
                             );
                             //res.header('auth-token', token);
-                            res.json({ msg: token });
+                            res.json({token: token });
                           } else {
                             res.json({ msg: "wrong password" });
                           }
@@ -202,10 +202,10 @@ authRouter.get("/confirm_email/:token", (req, res) => {
         res.send({msg: 'successfully confirmed email'})
       }).catch((err)=>{})
       } else {
-        res.send("invalid");
+        res.send({msg: "invalid"});
       }
     } else {
-      res.send("access denied");
+      res.send({ msg: "access denied" });
     }
 });
 

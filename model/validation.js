@@ -20,7 +20,7 @@ const handleAccountUpdateValidation = (data) => {
     first_name: Joi.string().min(2).required(),
     last_name: Joi.string().min(2).required(),
     address: Joi.string().required(),
-    phone: Joi.required(),
+    phone: Joi.string().required(),
     state: Joi.string().required(),
     lga: Joi.string().required(),
   });

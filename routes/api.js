@@ -25,7 +25,7 @@ route.post('/pay', ((req, res) => {
    
   const form = {
     full_name: req.body.full_name,
-     amount : req.body.amount,
+     amount : req.body.amount * 100,
   email : req.body.email
   };
     initializePayment(form, (error, body)=>{
@@ -36,7 +36,7 @@ route.post('/pay', ((req, res) => {
             return;
       }
       const response = JSON.parse(body);
-  
+  console.log(response)
       res.send(response.data.authorization_url)
     });
 }))
@@ -117,7 +117,7 @@ route.post("/cakes", upload, (req, res) => {
          if (data) {
            res.json(data);
          } else {
-           res.status(404).send("cake not saved");
+           res.status(404).send({msg: "cake not saved"});
          }
       })
       .catch((err) => {
@@ -132,7 +132,7 @@ route.get("/cakes", (req, res) => {
        if (data) {
          res.json(data);
        } else {
-         res.status(404).send("cakes doesnt exist");
+         res.status(404).send({msg: "cakes doesnt exist"});
        }
     })
     .catch((err) => {
@@ -147,7 +147,7 @@ route.get("/types/:category", (req, res) => {
       if (data) {
          res.json(data);
       } else {
-        res.status(404).send('category doesnt exist')
+        res.status(404).send({msg: 'category doesnt exist'})
       }
      
     })
@@ -167,7 +167,7 @@ route.post("/cakes/category", (req, res) => {
       if (data) {
         res.json(data);
       } else {
-        res.status(404).send("category not saved");
+        res.status(404).send({msg: "category not saved"});
       }
     })
     .catch((err) => {
@@ -181,7 +181,7 @@ route.get("/cakes/categories", (req, res) => {
       if (data) {
         res.json(data);
       } else {
-        res.status(404).send("categories doesnt exist");
+        res.status(404).send({msg: "categories doesnt exist"});
       }
     })
     .catch((err) => {
@@ -210,7 +210,7 @@ route.post('/orders', ((req, res) => {
     if (data) {
       res.json(data);
     } else {
-      res.status(404).send("order not saved");
+      res.status(404).send({msg: "order not saved"});
     }
   }).catch((err) =>{
     res.status(404).json({msg: err})
@@ -233,7 +233,7 @@ route.patch('/orders/:id', ((req, res) => {
      if (data) {
        res.json(data);
      } else {
-       res.status(404).send("order doesnt exist");
+       res.status(404).send({msg: "order doesnt exist"});
      }
     })
     .catch((err) => {
