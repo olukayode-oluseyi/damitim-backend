@@ -31,6 +31,7 @@ authRouter.get('/', ((req, res) => {
 }))
 
 authRouter.post("/register", (req, res) => {
+  console.log(req.body)
     const error = handleRegistrationValidation(req.body)
 
     if (error.error) {
